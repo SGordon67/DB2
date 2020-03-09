@@ -10,7 +10,7 @@
     <center>
     <form action="test.php" method="post"><br>
         <label style="font-size:20px;">Sign In</label><br><br>
-        <button type="ParentSingIn" formaction="http://localhost/dashboard/DB2/AdminSignIn.php">beep</button>
+        <button type="ParentSingIn" formaction="http://localhost/dashboard/DB2/AdminSignIn.php">Admin</button>
         <button type="ParentSingIn" formaction="http://localhost/dashboard/DB2/ParentSignIn.php">Parent</button>
         <button type="StudentSingIn" formaction="http://localhost/dashboard/DB2/StudentSignIn.php">Student</button><br><br><br>
         <label style="font-size:20px;">Register</label><br><br>
