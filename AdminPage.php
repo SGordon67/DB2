@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>z
 <body>
-<h1> <font face="Times New Roman" color="black" size="+10"><center>Student Info</center></font></h1>
+<h1> <font face="Times New Roman" color="black" size="+10"><center>Admin Info</center></font></h1>
     <center>
     <form action="" method="post">
     </form>
-    <form action="StudentSignIn.php" method="post"><br>
+    <form action="AdminSignIn.php" method="post"><br>
         <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
     <?php
@@ -25,14 +25,14 @@
             $id = $mysqli->query($qGetId);
             $targetID = mysqli_fetch_array($id);
 
-            // get an array of all student ID's
-            $qparentIDs = "SELECT student_id from students";
-            $pids = $mysqli->query($qparentIDs);
-            $studentIDs = mysqli_fetch_array($pids);
+            // get an array of all admin ID's
+            $qAdminIDs = "SELECT admin_id from admins";
+            $pids = $mysqli->query($qAdminIDs);
+            $adminIDs = mysqli_fetch_array($pids);
 
-            // check if target ID is in array of student ID's
-            if (!in_array($targetID[0], $studentIDs)){
-                exit('Invalid Student Email');
+            // check if target ID is in array of admin ID's
+            if (!in_array($targetID[0], $adminIDs)){
+                exit('Invalid Admin Email');
             }
 
             $qGetInfo = "SELECT * FROM users WHERE email = '$email'";

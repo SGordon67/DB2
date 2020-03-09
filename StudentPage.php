@@ -26,8 +26,8 @@
             $targetID = mysqli_fetch_array($id);
 
             // get an array of all student ID's
-            $qparentIDs = "SELECT student_id from students";
-            $pids = $mysqli->query($qparentIDs);
+            $qstudentIDs = "SELECT student_id from students";
+            $pids = $mysqli->query($qstudentIDs);
             $studentIDs = mysqli_fetch_array($pids);
 
             // check if target ID is in array of student ID's
