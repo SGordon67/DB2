@@ -12,7 +12,7 @@
         <label for="email">Email:</label>
         <input type="text" id="email" name="email"><br><br>
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password"><br><br>
+        <input type="password" id="password" name="password"><br><br>
         <input type="submit" class="button" name="signUpButton" value="Sign In"/>
     </form>
     <form action="SignIn.php" method="post"><br>
