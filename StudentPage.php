@@ -4,14 +4,11 @@
     <title>Database 2</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>z
+</head>
 <body>
 <h1> <font face="Times New Roman" color="black" size="+10"><center>Student Info</center></font></h1>
     <center>
     <form action="" method="post">
-    </form>
-    <form action="StudentSignIn.php" method="post"><br>
-        <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
     <?php
         if (isset($_POST['signUpButton']))
@@ -45,15 +42,39 @@
             }else{
                 echo "<table>"; // start a tag in the HTML
                 while($row = mysqli_fetch_array($result2)){   //Creates a loop to loop through results
-                echo "<tr><td>" . $row['id'] . "</td><td>" . $row['email'] . "</td>
-                        <td>" . $row['password'] . "</td><td>" . $row['name'] . "</td>
-                        <td>" . $row['phone'] . "</td></tr>";  //$row['index'] the index here is a field name
+                echo "  <tr>
+                            <td>ID:</td>
+                            <td>" . $row['id'] . "</td>
+                        </tr>
+                        <tr>  
+                            <td>Email:</td>
+                            <td>" . $row['email'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td>" . $row['password'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>" . $row['name'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>" . $row['phone'] . "</td>
+                        </tr>";
                 }
                 echo "</table>"; //Close the table in HTML
             }
             $mysqli->close();
         }
     ?>
+
+<form action="StudentEditInfo.php" method="post"><br>
+        <input type="submit" class="button" name="EditButton" value="Edit Information"/>
+    </form>
+    <form action="StudentSignIn.php" method="post"><br>
+        <input type="submit" class="button" name="returnButton" value="Return"/>
+    </form>
     </center>
 </body>
 </html>
