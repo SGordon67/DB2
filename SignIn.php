@@ -8,7 +8,7 @@
 <body>
 <h1> <font face="Times New Roman" color="black" size="+10"><center>Study Groups</center></font></h1>
     <center>
-    <form action="test.php" method="post"><br>
+    <form action="" method="post"><br>
         <label style="font-size:20px;">Sign In</label><br><br>
         <button type="ParentSingIn" formaction="http://localhost/dashboard/DB2/AdminSignIn.php">Admin</button>
         <button type="ParentSingIn" formaction="http://localhost/dashboard/DB2/ParentSignIn.php">Parent</button>
