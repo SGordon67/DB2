@@ -9,20 +9,19 @@
     <center>
     <label><font face="Times New Roman" color="black" size="+1">Edit Email</font></label>
     <form action="StudentPage.php" method="post">
-        <label for="email">Enter a new email address:</label>
+        <br><label for="email">Enter a new email address:</label>
         <input type="input" id="email" name="email"><br><br>
     </form>
     <form action="StudentSignIn.php" method="post"><br>
         <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
     <?php
-        $mysqli = new mysqli('localhost', 'root', '', 'db2project'); //The Blank string is the password
-        if (isset($_POST['signUpButton']))
+        $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+        if (isset($_POST['StEditEmail']))
         {
             $email = $_POST['email'];
             $password = $_POST['password'];
         }
-        echo $email
     ?>
     </center>
 </body>
