@@ -6,54 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1> <font face="Times New Roman" color="black" size="+10"><center>Parent Info</center></font></h1>
-    <center>
-    <form action="" method="post">
-    </form>
-    <form action="ParentSignIn.php" method="post"><br>
-        <input type="submit" class="button" name="returnButton" value="Return"/>
-    </form>
+<center>
+<h1> <font face="Times New Roman" color="black" size="+10">Parent Info</font></h1>
     <?php
-        if (isset($_POST['signUpButton']))
-        {
-            $mysqli = new mysqli('localhost', 'root', '', 'db2project'); //The Blank string is the password
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+        $bool = false;
+        $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        
+        // get the target ID entered
+        $qGetId = "SELECT id FROM users WHERE email = '$email'";
+        $id = $mysqli->query($qGetId);
+        $targetID = mysqli_fetch_array($id);
 
-            // get the target ID entered
-            $qGetId = "SELECT id FROM users WHERE email = '$email'";
-            $id = $mysqli->query($qGetId);
-            $targetID = mysqli_fetch_array($id);
-
-            // get an array of all parent ID's
-            $qparentIDs = "SELECT parent_id from parents";
-            $pids = $mysqli->query($qparentIDs);
-            $parentIDs = mysqli_fetch_array($pids);
-
-            // check if target ID is in array of parent ID's
-            if (!in_array($targetID[0], $parentIDs)){
-                exit('Invalid Parent Email');
+        // get an array of all student ID's
+        $pids = [];
+        $qparentIDs = "SELECT parent_id from students";
+        $res = $mysqli->query($qparentIDs);
+        while($row = mysqli_fetch_assoc($res)){
+            foreach($row as $cname => $cvalue){
+                array_push($pids,$cvalue);
             }
+        }
 
+        // check if target ID is in array of student ID's
+        if (!in_array($targetID[0], $pids)){
+            echo 'Invalid Parent Email';
+        }
+        else{
+            $bool = true;
             $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
             $result = $mysqli->query($qGetInfo);
             $result2 = $mysqli->query($qGetInfo);
 
             $testrow = mysqli_fetch_array($result);
             if($password != $testrow['password']){
+                $bool = false;
                 echo "Incorrect Password";
             }else{
+                $bool = true;
                 echo "<table>"; // start a tag in the HTML
                 while($row = mysqli_fetch_array($result2)){   //Creates a loop to loop through results
-                echo "<tr><td>" . $row['id'] . "</td><td>" . $row['email'] . "</td>
-                        <td>" . $row['password'] . "</td><td>" . $row['name'] . "</td>
-                        <td>" . $row['phone'] . "</td></tr>";  //$row['index'] the index here is a field name
+                echo "  <tr>
+                            <td>ID:</td>
+                            <td>" . $row['id'] . "</td>
+                        </tr>
+                        <tr>  
+                            <td>Email:</td>
+                            <td>" . $row['email'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td>" . $row['password'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>" . $row['name'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>" . $row['phone'] . "</td>
+                        </tr>";
                 }
                 echo "</table>"; //Close the table in HTML
             }
-            $mysqli->close();
         }
+        $mysqli->close();
     ?>
-    </center>
+
+<?php if($bool) : ?>
+
+<div>
+    <div style="display:inline-block;">
+    <form action="StudentEditEmail.php" method="post"><br>
+            <input type="submit" class="button" name="returnButton" value="Edit Email"/>
+    </form>
+    </div>
+    <div style="display:inline-block;">
+    <form action="StudentEditPassword.php" method="post"><br>
+            <input type="submit" class="button" name="returnButton" value="Edit Password"/>
+    </form>
+    </div>
+    <div style="display:inline-block;">
+    <form action="StudentEditPhone.php" method="post"><br>
+            <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
+    </form>
+    </div>
+</div>
+
+<?php endif; ?>
+
+<form action="ParentSignIn.php" method="post"><br>
+    <input type="submit" class="button" name="returnButton" value="Return"/>
+</form>
+</center>
 </body>
 </html>

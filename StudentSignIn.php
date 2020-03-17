@@ -18,13 +18,6 @@
     <form action="SignIn.php" method="post"><br>
         <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
-    <?php
-        if (isset($_POST['signUpButton']))
-        {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-        }
-    ?>
     </center>
 </body>
 </html>

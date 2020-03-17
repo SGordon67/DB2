@@ -7,22 +7,21 @@
 </head>
 <body>
     <center>
-    <label><font face="Times New Roman" color="black" size="+1">Edit Email</font></label>
-    <form action="StudentPage.php" method="post">
-        <br><label for="email">Enter a new email address:</label>
-        <input type="input" id="email" name="email"><br><br>
-    </form>
-    <form action="StudentSignIn.php" method="post"><br>
-        <input type="submit" class="button" name="returnButton" value="Return"/>
-    </form>
     <?php
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
-        if (isset($_POST['StEditEmail']))
-        {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-        }
+        $email = $_POST['email'];
+        $password = $_POST['password'];
     ?>
+
+    <label><font face="Times New Roman" color="black" size="+1">Edit Email</font></label>
+    <form action="StudentPage.php" method="post"><br>
+        <br><label for="email">Enter a new email address:</label>
+        <input type="input" id="emailIn" name="emailIn"><br><br>
+
+        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+        <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+        <input type="submit" class="button" name="returnButton" value="Return"/>
+    </form>
     </center>
 </body>
 </html>
