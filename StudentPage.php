@@ -47,7 +47,7 @@
             }else{
                 $bool = true;
                 echo "<table>"; // start a tag in the HTML
-                while($row = mysqli_fetch_array($result2)){   //Creates a loop to loop through results
+                while($row = mysqli_fetch_array($result2)){ // loop through result
                 echo "  <tr>
                             <td>ID:</td>
                             <td>" . $row['id'] . "</td>
