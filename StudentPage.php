@@ -35,17 +35,31 @@
             echo 'Invalid Student Email';
         }
         else{
+            // get all of the information from database starting with data in the users table
+            // then accessing parent email using parent id
+
+            // first grab student info from user table 
             $bool = true;
             $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
             $result = $mysqli->query($qGetInfo);
-            $result2 = $mysqli->query($qGetInfo);
-
             $testrow = mysqli_fetch_array($result);
+
+            // get the relevant parent id
+            $getPID = "SELECT parent_id FROM students WHERE student_id = {$targetID['id']}";
+            $pidRes = $mysqli->query($getPID);
+            $pidrow = mysqli_fetch_array($pidRes);
+
+            // get the parent email
+            $getPE = "SELECT email FROM users WHERE id = {$pidrow['parent_id']}";
+            $peRes = $mysqli->query($getPE);
+            $peRow = mysqli_fetch_array($peRes);
+
             if($password != $testrow['password']){
                 $bool = false;
                 echo "Incorrect Password";
             }else{
                 $bool = true;
+                $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
                 echo "<table>"; // start a tag in the HTML
                 while($row = mysqli_fetch_array($result2)){ // loop through result
                 echo "  <tr>
@@ -55,6 +69,10 @@
                         <tr>  
                             <td>Email:</td>
                             <td>" . $row['email'] . "</td>
+                        </tr>
+                        <tr>
+                            <td>Parent Email:</td>
+                            <td>" . $peRow['email'] . "</td>
                         </tr>
                         <tr>
                             <td>Password:</td>
@@ -79,7 +97,7 @@
 <?php if($bool) : ?>
 
 <div>
-    <!-- send info to next page -->
+    <!-- send info to next page whichever it may be-->
     <div style="display:inline-block;">
     <form action="StudentEditEmail.php" method="post"><br>
             <input type="hidden" name="email" value="<?php echo $email;?>" > 
