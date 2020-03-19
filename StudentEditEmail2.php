@@ -22,7 +22,10 @@
             $resEmail = False;
         } else{
             // query for updating the email based on input
-            $updateEmail = "UPDATE users SET email='$emailIn' WHERE email = '$email'";
+            $updateEmail = "UPDATE users 
+                            SET email='$emailIn' 
+                            WHERE email = '$email'
+                            AND password = '$password'";
             $resEmail = $mysqli->query($updateEmail);
             $head = "Success";
         }

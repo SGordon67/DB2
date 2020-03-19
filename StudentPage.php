@@ -90,15 +90,15 @@
     </div>
     <div style="display:inline-block;">
     <form action="StudentEditPassword.php" method="post"><br>
-            <input type="hidden" name='email' value= <?php $email ?> >
-            <input type="hidden" name="password" value= <?php $password ?> > 
+            <input type="hidden" name='email' value= <?php echo $email ?> >
+            <input type="hidden" name="password" value= <?php echo $password ?> > 
             <input type="submit" class="button" name="returnButton" value="Edit Password"/>
     </form>
     </div>
     <div style="display:inline-block;">
     <form action="StudentEditPhone.php" method="post"><br>
-            <input type="hidden" name='email' value= <?php $email ?> >
-            <input type="hidden" name="password" value= <?php $password ?> > 
+            <input type="hidden" name='email' value= <?php echo $email ?> >
+            <input type="hidden" name="password" value= <?php echo $password ?> > 
             <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
     </form>
     </div>
