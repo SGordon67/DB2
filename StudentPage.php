@@ -9,6 +9,7 @@
 <h1> <font face="Times New Roman" color="black" size="+10"><center>Student Info</center></font></h1>
     <center>
     <?php
+        $user = "student";
         $bool = false;
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
@@ -66,13 +67,13 @@
                             <td>ID:</td>
                             <td>" . $row['id'] . "</td>
                         </tr>
-                        <tr>  
-                            <td>Email:</td>
-                            <td>" . $row['email'] . "</td>
-                        </tr>
                         <tr>
                             <td>Parent Email:</td>
                             <td>" . $peRow['email'] . "</td>
+                        </tr>
+                        <tr>  
+                            <td>Email:</td>
+                            <td>" . $row['email'] . "</td>
                         </tr>
                         <tr>
                             <td>Password:</td>
@@ -95,33 +96,34 @@
 
 
 <?php if($bool) : ?>
-
 <div>
     <!-- send info to next page whichever it may be-->
     <div style="display:inline-block;">
-    <form action="StudentEditEmail.php" method="post"><br>
+    <form action="UserEditEmail.php" method="post"><br>
             <input type="hidden" name="email" value="<?php echo $email;?>" > 
             <input type="hidden" name="password" value="<?php echo $password;?>" >
+            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
             <input type="submit" class="button" name="returnButton" value="Edit Email"/>
     </form>
 
     </div>
     <div style="display:inline-block;">
-    <form action="StudentEditPassword.php" method="post"><br>
+    <form action="UserEditPassword.php" method="post"><br>
             <input type="hidden" name='email' value= <?php echo $email ?> >
-            <input type="hidden" name="password" value= <?php echo $password ?> > 
+            <input type="hidden" name="password" value= <?php echo $password ?> >
+            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
             <input type="submit" class="button" name="returnButton" value="Edit Password"/>
     </form>
     </div>
     <div style="display:inline-block;">
-    <form action="StudentEditPhone.php" method="post"><br>
+    <form action="UserEditPhone.php" method="post"><br>
             <input type="hidden" name='email' value= <?php echo $email ?> >
-            <input type="hidden" name="password" value= <?php echo $password ?> > 
+            <input type="hidden" name="password" value= <?php echo $password ?> >
+            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
             <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
     </form>
     </div>
 </div>
-
 <?php endif; ?>
 
 <form action="StudentSignIn.php" method="post"><br>

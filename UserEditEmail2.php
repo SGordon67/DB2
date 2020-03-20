@@ -13,7 +13,8 @@
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
         $password = $_POST['password'];
-
+        $user = $_POST['user'];
+        
         // validate new email
         $emailIn = trim(htmlspecialchars($_POST['emailIn']));
         $emailIn = filter_var($emailIn, FILTER_VALIDATE_EMAIL);
@@ -31,14 +32,22 @@
         }
     ?>
     <br>
-    <label><font face="Times New Roman" color="black" size="+1"><?php echo $head;?></font></label>
+    <label><font face="Times New Roman" color="black" size="+1"><?php echo $head; ?></font></label>
+    
+    <?php if($user == 'student') : ?>
     <form action="StudentPage.php" method="post"><br>
+    <?php elseif($user == 'parent') : ?>
+    <form action="ParentPage.php" method="post"><br>
+    <?php else : ?>
+    <form action="AdminPage.php" method="post"><br>
+    <?php endif; ?>
         <?php if($resEmail) : ?>
             <input type="hidden" name="email" value="<?php echo $emailIn;?>" > 
         <?php else : ?>
             <input type="hidden" name="email" value="<?php echo $email;?>" > 
         <?php endif; ?>
         <input type="hidden" name="password" value="<?php echo $password;?>" >
+        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
         <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
     </center>

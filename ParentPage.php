@@ -9,6 +9,7 @@
 <center>
 <h1> <font face="Times New Roman" color="black" size="+10">Parent Info</font></h1>
     <?php
+        $user = "parent";
         $bool = false;
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
@@ -30,70 +31,81 @@
         }
 
         // check if target ID is in array of student ID's
-        if (!in_array($targetID[0], $pids)){
-            echo 'Invalid Parent Email';
-        }
-        else{
-            $bool = true;
-            $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
-            $result = $mysqli->query($qGetInfo);
-            $result2 = $mysqli->query($qGetInfo);
-
-            $testrow = mysqli_fetch_array($result);
-            if($password != $testrow['password']){
-                $bool = false;
-                echo "Incorrect Password";
-            }else{
+        if(empty($targetID)){
+            echo 'Invalid Parent Email EMPTY';
+        } else{
+            if (!in_array($targetID[0], $pids)){
+                echo 'Invalid Parent Email';
+            }
+            else{
                 $bool = true;
-                echo "<table>"; // start a tag in the HTML
-                while($row = mysqli_fetch_array($result2)){   //Creates a loop to loop through results
-                echo "  <tr>
-                            <td>ID:</td>
-                            <td>" . $row['id'] . "</td>
-                        </tr>
-                        <tr>  
-                            <td>Email:</td>
-                            <td>" . $row['email'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Password:</td>
-                            <td>" . $row['password'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Name:</td>
-                            <td>" . $row['name'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Phone:</td>
-                            <td>" . $row['phone'] . "</td>
-                        </tr>";
+                $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
+                $result = $mysqli->query($qGetInfo);
+                $result2 = $mysqli->query($qGetInfo);
+
+                $testrow = mysqli_fetch_array($result);
+                if($password != $testrow['password']){
+                    $bool = false;
+                    echo "Incorrect Password";
+                }else{
+                    $bool = true;
+                    echo "<table>"; // start a tag in the HTML
+                    while($row = mysqli_fetch_array($result2)){   //Creates a loop to loop through results
+                    echo "  <tr>
+                                <td>ID:</td>
+                                <td>" . $row['id'] . "</td>
+                            </tr>
+                            <tr>  
+                                <td>Email:</td>
+                                <td>" . $row['email'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>" . $row['password'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td>" . $row['name'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>" . $row['phone'] . "</td>
+                            </tr>";
+                    }
+                    echo "</table>"; //Close the table in HTML
                 }
-                echo "</table>"; //Close the table in HTML
             }
         }
         $mysqli->close();
     ?>
 
 <?php if($bool) : ?>
-
 <div>
     <div style="display:inline-block;">
-    <form action="StudentEditEmail.php" method="post"><br>
+    <form action="UserEditEmail.php" method="post"><br>
+            <input type="hidden" name="email" value="<?php echo $email;?>" > 
+            <input type="hidden" name="password" value="<?php echo $password;?>" >
+            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
             <input type="submit" class="button" name="returnButton" value="Edit Email"/>
     </form>
     </div>
     <div style="display:inline-block;">
-    <form action="StudentEditPassword.php" method="post"><br>
+    <form action="UserEditPassword.php" method="post"><br>
+            <input type="hidden" name="email" value="<?php echo $email;?>" > 
+            <input type="hidden" name="password" value="<?php echo $password;?>" >
+            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
             <input type="submit" class="button" name="returnButton" value="Edit Password"/>
     </form>
     </div>
     <div style="display:inline-block;">
-    <form action="StudentEditPhone.php" method="post"><br>
+    <form action="UserEditPhone.php" method="post"><br>
+            <input type="hidden" name="email" value="<?php echo $email;?>" > 
+            <input type="hidden" name="password" value="<?php echo $password;?>" >
+            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
             <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
     </form>
     </div>
 </div>
-
 <?php endif; ?>
 
 <form action="ParentSignIn.php" method="post"><br>

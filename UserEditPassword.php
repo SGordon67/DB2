@@ -11,20 +11,30 @@
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $user = $_POST['user'];
     ?>
 
     <label><font face="Times New Roman" color="black" size="+1">Edit Password</font></label>
-    <form action="StudentEditPassword2.php" method="post"><br>
+    <form action="UserEditPassword2.php" method="post"><br>
         <br><label for="password">Enter a new password:</label>
         <input type="input" id="passwordIn" name="passwordIn"><br><br>
 
         <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
         <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
         <input type="submit" name="ChEmail" class="button" value="Change Password" />
     </form>
+
+    <?php if($user == "student") : ?>
     <form action="StudentPage.php" method="post"><br>
-        <input type="hidden" name="email" value="<?php echo $email;?>" > 
-        <input type="hidden" name="password" value="<?php echo $password;?>" >
+    <?php elseif($user == "parent") : ?>
+    <form action="ParentPage.php" method="post"><br>
+    <?php else : ?>
+    <form action="AdminPage.php" method="post"><br>
+    <?php endif; ?>
+        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+        <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
         <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
     </center>
