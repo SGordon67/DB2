@@ -20,9 +20,9 @@
         $id = $mysqli->query($qGetId);
         $targetID = mysqli_fetch_array($id);
 
-        // get an array of all student ID's
+        // get an array of all parent ID's
         $pids = [];
-        $qparentIDs = "SELECT parent_id from students";
+        $qparentIDs = "SELECT parent_id from parents";
         $res = $mysqli->query($qparentIDs);
         while($row = mysqli_fetch_assoc($res)){
             foreach($row as $cname => $cvalue){
@@ -32,16 +32,37 @@
 
         // check if target ID is in array of student ID's
         if(empty($targetID)){
-            echo 'Invalid Parent Email EMPTY';
+            echo 'Invalid Parent Email';
         } else{
             if (!in_array($targetID[0], $pids)){
                 echo 'Invalid Parent Email';
             }
             else{
+                // get all of the information from database starting with data in the users table
+                // then accessing parent email using parent id
+
+                // first grab student info from user table 
                 $bool = true;
                 $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
                 $result = $mysqli->query($qGetInfo);
                 $result2 = $mysqli->query($qGetInfo);
+
+                // get the id's of the children of current parent 
+                $sids = [];
+                $getSIDs = "SELECT student_id FROM students WHERE parent_id = {$targetID['id']}";
+                $sidsRes = $mysqli->query($getSIDs);
+                while($sidRow = mysqli_fetch_array($sidsRes)) {
+                    array_push($sids, $sidRow['student_id']);
+                }
+
+                // get the emails that correspond to the student id's
+                $sEmails = [];
+                $getSEmails = "SELECT email FROM users WHERE id IN 
+                                (SELECT student_id AS id FROM students WHERE parent_id = {$targetID['id']})";
+                $sEmailRes = $mysqli->query($getSEmails);
+                while($SERow = mysqli_fetch_array($sEmailRes)) {
+                    array_push($sEmails, $SERow['email']);
+                }
 
                 $testrow = mysqli_fetch_array($result);
                 if($password != $testrow['password']){
@@ -71,6 +92,14 @@
                                 <td>Phone:</td>
                                 <td>" . $row['phone'] . "</td>
                             </tr>";
+                            foreach ($sEmails as &$value) {
+                                echo "
+                                <tr>
+                                <td>Student Email:</td>
+                                <td>" . $value . "</td>
+                                </tr>
+                                ";
+                            }
                     }
                     echo "</table>"; //Close the table in HTML
                 }

@@ -31,64 +31,68 @@
         }
 
         // check if target ID is in array of student ID's
-        if (!in_array($targetID[0], $sids)){
-            $bool = false;
-            echo 'Invalid Student Email';
-        }
-        else{
-            // get all of the information from database starting with data in the users table
-            // then accessing parent email using parent id
-
-            // first grab student info from user table 
-            $bool = true;
-            $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
-            $result = $mysqli->query($qGetInfo);
-            $testrow = mysqli_fetch_array($result);
-
-            // get the relevant parent id
-            $getPID = "SELECT parent_id FROM students WHERE student_id = {$targetID['id']}";
-            $pidRes = $mysqli->query($getPID);
-            $pidrow = mysqli_fetch_array($pidRes);
-
-            // get the parent email
-            $getPE = "SELECT email FROM users WHERE id = {$pidrow['parent_id']}";
-            $peRes = $mysqli->query($getPE);
-            $peRow = mysqli_fetch_array($peRes);
-
-            if($password != $testrow['password']){
+        if(empty($targetID)){
+            echo 'Invalid Parent Email';
+        } else{
+            if (!in_array($targetID[0], $sids)){
                 $bool = false;
-                echo "Incorrect Password";
-            }else{
+                echo 'Invalid Student Email';
+            }
+            else{
+                // get all of the information from database starting with data in the users table
+                // then accessing parent email using parent id
+
+                // first grab student info from user table 
                 $bool = true;
-                $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
-                echo "<table>"; // start a tag in the HTML
-                while($row = mysqli_fetch_array($result2)){ // loop through result
-                echo "  <tr>
-                            <td>ID:</td>
-                            <td>" . $row['id'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Parent Email:</td>
-                            <td>" . $peRow['email'] . "</td>
-                        </tr>
-                        <tr>  
-                            <td>Email:</td>
-                            <td>" . $row['email'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Password:</td>
-                            <td>" . $row['password'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Name:</td>
-                            <td>" . $row['name'] . "</td>
-                        </tr>
-                        <tr>
-                            <td>Phone:</td>
-                            <td>" . $row['phone'] . "</td>
-                        </tr>";
+                $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
+                $result = $mysqli->query($qGetInfo);
+                $testrow = mysqli_fetch_array($result);
+
+                // get the relevant parent id
+                $getPID = "SELECT parent_id FROM students WHERE student_id = {$targetID['id']}";
+                $pidRes = $mysqli->query($getPID);
+                $pidrow = mysqli_fetch_array($pidRes);
+
+                // get the parent email
+                $getPE = "SELECT email FROM users WHERE id = {$pidrow['parent_id']}";
+                $peRes = $mysqli->query($getPE);
+                $peRow = mysqli_fetch_array($peRes);
+
+                if($password != $testrow['password']){
+                    $bool = false;
+                    echo "Incorrect Password";
+                }else{
+                    $bool = true;
+                    $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
+                    echo "<table>"; // start a tag in the HTML
+                    while($row = mysqli_fetch_array($result2)){ // loop through result
+                    echo "  <tr>
+                                <td>ID:</td>
+                                <td>" . $row['id'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Parent Email:</td>
+                                <td>" . $peRow['email'] . "</td>
+                            </tr>
+                            <tr>  
+                                <td>Email:</td>
+                                <td>" . $row['email'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>" . $row['password'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td>" . $row['name'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>" . $row['phone'] . "</td>
+                            </tr>";
+                    }
+                    echo "</table>"; //Close the table in HTML
                 }
-                echo "</table>"; //Close the table in HTML
             }
         }
         $mysqli->close();
