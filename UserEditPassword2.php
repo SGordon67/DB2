@@ -12,6 +12,7 @@
         $head = "Error";
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
+        $emailEDIT = $_POST['emailEDIT'];
         $password = $_POST['password'];
         $passwordIn = $_POST['passwordIn'];
         $user = $_POST['user'];
@@ -24,8 +25,7 @@
         // query for updating the password based on input
         $updatePass = " UPDATE users 
                         SET password ='$passwordIn' 
-                        WHERE email = '$email' 
-                        AND password = '$password'";
+                        WHERE email = '$emailEDIT'";
         $resPass = $mysqli->query($updatePass);
         if($resPass){
             $head = "Success";
@@ -42,7 +42,7 @@
     <?php else : ?>
     <form action="AdminPage.php" method="post"><br>
     <?php endif; ?>
-        <?php if($resPass) : ?>
+        <?php if($resPass && $email == $emailEDIT) : ?>
             <input type="hidden" name="password" value="<?php echo $passwordIn;?>" > 
         <?php else : ?>
             <input type="hidden" name="password" value="<?php echo $password;?>" > 

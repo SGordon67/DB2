@@ -71,24 +71,51 @@
                                 <td>" . $row['id'] . "</td>
                             </tr>
                             <tr>
+                                <td>Name:</td>
+                                <td>" . $row['name'] . "</td>
+                            </tr>
+                            <tr>
                                 <td>Parent Email:</td>
                                 <td>" . $peRow['email'] . "</td>
                             </tr>
                             <tr>  
                                 <td>Email:</td>
                                 <td>" . $row['email'] . "</td>
+                                <td>";?>
+                                <form action="UserEditEmail.php" method="post"><br>
+                                        <input type="hidden" name="email" value="<?php echo $email;?>" > 
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value="<?php echo $password;?>" >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                        <input type="submit" class="button" name="editEmail" value="Edit Email"/>
+                                </form><?php echo "
+                                </td>
                             </tr>
                             <tr>
                                 <td>Password:</td>
                                 <td>" . $row['password'] . "</td>
-                            </tr>
-                            <tr>
-                                <td>Name:</td>
-                                <td>" . $row['name'] . "</td>
+                                <td>";?>
+                                <form action="UserEditPassword.php" method="post"><br>
+                                        <input type="hidden" name='email' value= <?php echo $email ?> >
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value= <?php echo $password ?> >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+                                        <input type="submit" class="button" name="editPassword" value="Edit Password"/>
+                                </form><?php echo "
+                                </td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
                                 <td>" . $row['phone'] . "</td>
+                                <td>";?>
+                                <form action="UserEditPhone.php" method="post"><br>
+                                        <input type="hidden" name='email' value= <?php echo $email ?> >
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value= <?php echo $password ?> >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                        <input type="submit" class="button" name="editPhone" value="Edit Phone"/>
+                                </form><?php echo "
+                                </td>
                             </tr>";
                     }
                     echo "</table>"; //Close the table in HTML
@@ -97,38 +124,6 @@
         }
         $mysqli->close();
     ?>
-
-
-<?php if($bool) : ?>
-<div>
-    <!-- send info to next page whichever it may be-->
-    <div style="display:inline-block;">
-    <form action="UserEditEmail.php" method="post"><br>
-            <input type="hidden" name="email" value="<?php echo $email;?>" > 
-            <input type="hidden" name="password" value="<?php echo $password;?>" >
-            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
-            <input type="submit" class="button" name="returnButton" value="Edit Email"/>
-    </form>
-
-    </div>
-    <div style="display:inline-block;">
-    <form action="UserEditPassword.php" method="post"><br>
-            <input type="hidden" name='email' value= <?php echo $email ?> >
-            <input type="hidden" name="password" value= <?php echo $password ?> >
-            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
-            <input type="submit" class="button" name="returnButton" value="Edit Password"/>
-    </form>
-    </div>
-    <div style="display:inline-block;">
-    <form action="UserEditPhone.php" method="post"><br>
-            <input type="hidden" name='email' value= <?php echo $email ?> >
-            <input type="hidden" name="password" value= <?php echo $password ?> >
-            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
-            <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
-    </form>
-    </div>
-</div>
-<?php endif; ?>
 
 <form action="StudentSignIn.php" method="post"><br>
     <input type="submit" class="button" name="returnButton" value="Return"/>

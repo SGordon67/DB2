@@ -76,66 +76,117 @@
                                 <td>ID:</td>
                                 <td>" . $row['id'] . "</td>
                             </tr>
-                            <tr>  
-                                <td>Email:</td>
-                                <td>" . $row['email'] . "</td>
-                            </tr>
-                            <tr>
-                                <td>Password:</td>
-                                <td>" . $row['password'] . "</td>
-                            </tr>
                             <tr>
                                 <td>Name:</td>
                                 <td>" . $row['name'] . "</td>
                             </tr>
+                            <tr>  
+                                <td>Email:</td>
+                                <td>" . $row['email'] . "</td>
+                                <td>";?>
+                                <form action="UserEditEmail.php" method="post"><br>
+                                        <input type="hidden" name="email" value="<?php echo $email;?>" > 
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value="<?php echo $password;?>" >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                        <input type="submit" class="button" name="returnButton" value="Edit Email"/>
+                                </form><?php echo "
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>" . $row['password'] . "</td>
+                                <td>";?>
+                                <form action="UserEditPassword.php" method="post"><br>
+                                        <input type="hidden" name="email" value="<?php echo $email;?>" >
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value="<?php echo $password;?>" >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                        <input type="submit" class="button" name="returnButton" value="Edit Password"/>
+                                </form><?php echo "
+                                </td>
+                            </tr>
                             <tr>
                                 <td>Phone:</td>
                                 <td>" . $row['phone'] . "</td>
-                            </tr>";
+                                <td>";?>
+                                <form action="UserEditPhone.php" method="post"><br>
+                                        <input type="hidden" name="email" value="<?php echo $email;?>" >
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value="<?php echo $password;?>" >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                        <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
+                                </form><?php echo "
+                                </td>
+                            </tr><tr><td></td><td><br><br>Student Information:</td></tr><tr>";
+                            // This section is for each of the children of the parent
+                            echo "<table><tr><td>";
                             foreach ($sEmails as &$value) {
-                                echo "
-                                <tr>
-                                <td>Student Email:</td>
-                                <td>" . $value . "</td>
-                                </tr>
-                                ";
+                                $qstudInfo = "SELECT * FROM users WHERE email = '$value'";
+                                $resQ = $mysqli->query($qstudInfo);
+                                echo "<table>";
+                                while($resQrow = mysqli_fetch_array($resQ)){ // loop through result
+                                echo "  <tr>
+                                            <td>ID:</td>
+                                            <td>" . $resQrow['id'] . "</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>" . $resQrow['name'] . "</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parent Email:</td>
+                                            <td>" . $resQrow['email'] . "</td>
+                                        </tr>
+                                        <tr>  
+                                            <td>Email:</td>
+                                            <td>" . $resQrow['email'] . "</td>
+                                            <td>";?>
+                                            <form action="UserEditEmail.php" method="post"><br>
+                                                    <input type="hidden" name="email" value="<?php echo $email;?>" > 
+                                                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                                    <input type="hidden" name="password" value="<?php echo $password;?>" >
+                                                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                                    <input type="submit" class="button" name="returnButton" value="Edit Email"/>
+                                            </form><?php echo "
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password:</td>
+                                            <td>" . $resQrow['password'] . "</td>
+                                            <td>";?>
+                                            <form action="UserEditPassword.php" method="post"><br>
+                                                    <input type="hidden" name='email' value= <?php echo $email ?> >
+                                                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                                    <input type="hidden" name="password" value= <?php echo $password ?> >
+                                                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+                                                    <input type="submit" class="button" name="returnButton" value="Edit Password"/>
+                                            </form><?php echo "
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td>
+                                            <td>" . $resQrow['phone'] . "</td>
+                                            <td>";?>
+                                            <form action="UserEditPhone.php" method="post"><br>
+                                                    <input type="hidden" name='email' value= <?php echo $email ?> >
+                                                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                                    <input type="hidden" name="password" value= <?php echo $password ?> >
+                                                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                                    <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
+                                            </form><?php echo "
+                                            </td>
+                                        </tr>";
+                                }
+                                echo "</table></td><td>";
                             }
                     }
-                    echo "</table>"; //Close the table in HTML
+                    echo "</tr></table>";
                 }
             }
         }
         $mysqli->close();
     ?>
-
-<?php if($bool) : ?>
-<div>
-    <div style="display:inline-block;">
-    <form action="UserEditEmail.php" method="post"><br>
-            <input type="hidden" name="email" value="<?php echo $email;?>" > 
-            <input type="hidden" name="password" value="<?php echo $password;?>" >
-            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
-            <input type="submit" class="button" name="returnButton" value="Edit Email"/>
-    </form>
-    </div>
-    <div style="display:inline-block;">
-    <form action="UserEditPassword.php" method="post"><br>
-            <input type="hidden" name="email" value="<?php echo $email;?>" > 
-            <input type="hidden" name="password" value="<?php echo $password;?>" >
-            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
-            <input type="submit" class="button" name="returnButton" value="Edit Password"/>
-    </form>
-    </div>
-    <div style="display:inline-block;">
-    <form action="UserEditPhone.php" method="post"><br>
-            <input type="hidden" name="email" value="<?php echo $email;?>" > 
-            <input type="hidden" name="password" value="<?php echo $password;?>" >
-            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
-            <input type="submit" class="button" name="returnButton" value="Edit Phone"/>
-    </form>
-    </div>
-</div>
-<?php endif; ?>
 
 <form action="ParentSignIn.php" method="post"><br>
     <input type="submit" class="button" name="returnButton" value="Return"/>
