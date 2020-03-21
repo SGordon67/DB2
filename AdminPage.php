@@ -20,7 +20,7 @@
         $id = $mysqli->query($qGetId);
         $targetID = mysqli_fetch_array($id);
 
-        // get an array of all student ID's
+        // get an array of all admin ID's
         $aIDs = [];
         $qadminIDs = "SELECT admin_id from admins";
         $res = $mysqli->query($qadminIDs);
@@ -30,7 +30,7 @@
             }
         }
 
-        // check if target ID is in array of student ID's
+        // check if target ID is in array of admin ID's
         if(empty($targetID)){
             echo 'Invalid Admin Email';
         } else{
@@ -39,10 +39,7 @@
                 echo 'Invalid Admin Email';
             }
             else{
-                // get all of the information from database starting with data in the users table
-                // then accessing parent email using parent id
-
-                // first grab admin info from user table 
+                // get the information based on the email given
                 $bool = true;
                 $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
                 $result = $mysqli->query($qGetInfo);
