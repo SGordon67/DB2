@@ -10,6 +10,7 @@
     <?php
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
+        $emailEDIT = $_POST['emailEDIT'];
         $password = $_POST['password'];
         $user = $_POST['user'];
 
@@ -21,6 +22,7 @@
         <input type="input" id="phoneIn" name="phoneIn"><br><br>
 
         <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" > 
         <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
         <input type="submit" name="ChPhone" class="button" value="Change Phone" />
@@ -33,7 +35,8 @@
     <?php else : ?>
     <form action="AdminPage.php" method="post"><br>
     <?php endif; ?>
-        <input type="hidden" name="email" value="<?php echo $email;?>" > 
+        <input type="hidden" name="email" value="<?php echo $email;?>" >
+        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
         <input type="hidden" name="password" value="<?php echo $password;?>" >
         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
         <input type="submit" class="button" name="returnButton" value="Return"/>

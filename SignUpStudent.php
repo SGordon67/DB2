@@ -9,18 +9,27 @@
 <h1> <font face="Times New Roman" color="black" size="+10"><center>Student Sign Up</center></font></h1>
     <center>
     <form action="" method="post">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"><br><br>
-        <label for="pemail">Parent Email:</label>
-        <input type="text" id="pemail" name="pemail"><br><br>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone"><br><br>
-        <label for="grade">Grade:</label>
-        <input type="text" id="grade" name="grade"><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br><br>
+        <?php echo "<table><tr><td>Email:</td><th>"; ?>
+        <input type="text" id="email" name="email">
+        <?php echo "</th></tr><tr><td>Password:</td><td>"; ?>
+        <input type="password" id="password" name="password">
+        <?php echo "</td></tr><tr><td>Parent Email:</td><td>"; ?>
+        <input type="text" id="pemail" name="pemail">
+        <?php echo "</td></tr><tr><td>Name:</td><td>"; ?>
+        <input type="text" id="name" name="name">
+        <?php echo "</td></tr><tr><td>Phone:</td><td>"; ?>
+        <input type="text" id="phone" name="phone">
+        <?php echo "</td></tr><tr><td>Grade:</td><td>"; ?>
+        <select id="grade" name="grade">
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <?php echo "</td></tr></table>"; ?><br><br>
         <input type="submit" class="button" name="signUpButton" value="Sign Up"/>
     </form>
     <form action="SignIn.php" method="post"><br>

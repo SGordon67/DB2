@@ -12,6 +12,7 @@
         $head = "Error";
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
+        $emailEDIT = $_POST['emailEDIT'];
         $password = $_POST['password'];
         $user = $_POST['user'];
 
@@ -24,8 +25,7 @@
             // query for updating the email based on input
             $updatePhone = "UPDATE users 
                             SET phone='$phoneIn' 
-                            WHERE email = '$email'
-                            AND password = '$password'";
+                            WHERE email = '$emailEDIT'";
             $resPhone = $mysqli->query($updatePhone);
             $head = "Success";
         }
@@ -40,7 +40,8 @@
     <?php else : ?>
     <form action="AdminPage.php" method="post"><br>
     <?php endif; ?>
-        <input type="hidden" name="email" value="<?php echo $email;?>" > 
+        <input type="hidden" name="email" value="<?php echo $email;?>" >
+        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
         <input type="hidden" name="password" value="<?php echo $password;?>" >
         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
         <input type="submit" class="button" name="returnButton" value="Return"/>

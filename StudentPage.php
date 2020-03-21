@@ -82,7 +82,7 @@
                                 <td>Email:</td>
                                 <td>" . $row['email'] . "</td>
                                 <td>";?>
-                                <form action="UserEditEmail.php" method="post"><br>
+                                <form action="UserEditEmail.php" method="post">
                                         <input type="hidden" name="email" value="<?php echo $email;?>" > 
                                         <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
                                         <input type="hidden" name="password" value="<?php echo $password;?>" >
@@ -95,7 +95,7 @@
                                 <td>Password:</td>
                                 <td>" . $row['password'] . "</td>
                                 <td>";?>
-                                <form action="UserEditPassword.php" method="post"><br>
+                                <form action="UserEditPassword.php" method="post">
                                         <input type="hidden" name='email' value= <?php echo $email ?> >
                                         <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
                                         <input type="hidden" name="password" value= <?php echo $password ?> >
@@ -108,7 +108,7 @@
                                 <td>Phone:</td>
                                 <td>" . $row['phone'] . "</td>
                                 <td>";?>
-                                <form action="UserEditPhone.php" method="post"><br>
+                                <form action="UserEditPhone.php" method="post">
                                         <input type="hidden" name='email' value= <?php echo $email ?> >
                                         <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
                                         <input type="hidden" name="password" value= <?php echo $password ?> >
