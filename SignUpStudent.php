@@ -57,16 +57,15 @@
             if(!preg_match('/^[0-9]{10}+$/', $phone)) {
                 exit('Invalid Phone Number');
             }
-            // validate grade level
+            // no validation needed, changed to drop down menu
             $grade = $_POST['grade'];
-            if(($grade <= 0) || ($grade >= 50)){
-                exit('Invalid Grade');
-            }
 
+            // insert into users table
             $mysqli = new mysqli('localhost', 'root', '', 'db2project');
             $query = "INSERT INTO users(email, password, name, phone) VALUES ('$email','$password','$name','$phone')";
             $mysqli->query($query);
-
+            
+            // get the id that was created for this user
             $query2 = "SELECT id FROM users WHERE email = '$email'";
             $result = $mysqli->query($query2);
             $studentID;
@@ -74,6 +73,7 @@
                 $studentID = $row['id'];
             }
 
+            // get the parents id
             $query3 = "SELECT id FROM users WHERE email = '$parentEmail'";
             $result3 = $mysqli->query($query3);
             $parentID;
@@ -81,6 +81,7 @@
                 $parentID = $row['id'];
             }
 
+            // insert into students table
             $query4 = "INSERT INTO students(student_id, grade, parent_id) VALUES ($studentID, '$grade', $parentID)";
             $result4 = $mysqli->query($query4);
             if($result4){
@@ -93,6 +94,10 @@
                     echo " ";
                 }
             }
+
+            // insert into the proper group
+            //$query5 = "";
+            //$result5 = $mysqli->query($query5);
 
         }
     ?>

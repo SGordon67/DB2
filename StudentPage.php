@@ -32,7 +32,7 @@
 
         // check if target ID is in array of student ID's
         if(empty($targetID)){
-            echo 'Invalid Parent Email';
+            echo 'Invalid Student Email';
         } else{
             if (!in_array($targetID[0], $sids)){
                 $bool = false;
@@ -118,7 +118,7 @@
                                 </td>
                             </tr>";
                     }
-                    echo "</table>"; //Close the table in HTML
+                    echo "</table>";
                 }
             }
         }

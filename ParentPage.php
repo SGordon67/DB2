@@ -30,7 +30,7 @@
             }
         }
 
-        // check if target ID is in array of student ID's
+        // check if target ID is in array of parent ID's
         if(empty($targetID)){
             echo 'Invalid Parent Email';
         } else{
