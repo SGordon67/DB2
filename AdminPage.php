@@ -10,7 +10,6 @@
     <center>
     <?php
         $user = "admin";
-        $bool = false;
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -35,23 +34,19 @@
             echo 'Invalid Admin Email';
         } else{
             if (!in_array($targetID[0], $aIDs)){
-                $bool = false;
                 echo 'Invalid Admin Email';
             }
             else{
                 // get the information based on the email given
-                $bool = true;
                 $qGetInfo = "SELECT * FROM users WHERE email = '$email'";
                 $result = $mysqli->query($qGetInfo);
                 $testrow = mysqli_fetch_array($result);
 
                 if($password != $testrow['password']){
-                    $bool = false;
                     echo "Incorrect Password";
                 }else{
-                    $bool = true;
                     $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
-                    echo "<table>"; // start a tag in the HTML
+                    echo "<table>"; // table for showing the admin information
                     while($row = mysqli_fetch_array($result2)){ // loop through result
                     echo "  <tr>
                                 <td>ID:</td>
@@ -101,9 +96,10 @@
                                 </td>
                             </tr>";
                     }
+                    // dispaly the buttons for viewing and editing eetings
                     echo " <tr><td><br>Meetings:</td><td>"; ?><br>
                     <form action="ViewvMeeting.php" method="post">
-                        <input type="hidden" name='email' value= <?php echo $email ?> >
+                        <input type="hidden" name="email" value= <?php echo $email ?> >
                         <input type="hidden" name="password" value= <?php echo $password ?> >
                         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                         <input type="submit" class="button" name="meetingButton" value="View Meetings"/>

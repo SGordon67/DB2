@@ -90,15 +90,7 @@
                 echo "Inconsistency, sign up incomplete";
                 $query5 = "DELETE FROM users WHERE id = $studentID";
                 $result5 = $mysqli->query($query5);
-                if($result5){
-                    echo " ";
-                }
             }
-
-            // insert into the proper group
-            //$query5 = "";
-            //$result5 = $mysqli->query($query5);
-
         }
     ?>
     </center>
