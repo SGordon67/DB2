@@ -20,6 +20,11 @@
     $temp = 0;
     echo "<br>";
     while($row = mysqli_fetch_array($result)){ // loop through result
+        // get the time information for meeting
+        $getMeetingTime = "SELECT start_time, end_time FROM time_slot WHERE time_slot_id = {$row['time_slot_id']}";
+        $timeResult = $mysqli->query($getMeetingTime);
+        $timeArr = mysqli_fetch_array($timeResult);
+        // Display the table
         echo "  <table><tr>
                     <td>ID:</td>
                     <td>" . $row['meet_id'] . "</td>
@@ -31,6 +36,14 @@
                 <tr>
                     <td>Date:</td>
                     <td>" . $row['date'] . "</td>
+                </tr>
+                <tr>
+                    <td>Start Time:</td>
+                    <td>" . $timeArr['start_time'] . "</td>
+                </tr>
+                <tr>
+                    <td>End Time:</td>
+                    <td>" . $timeArr['end_time'] . "</td>
                 </tr>
                 <tr>
                     <td>Group:</td>
@@ -48,6 +61,7 @@
                     </td>
                 </tr></table>";
                 $temp+=1;
+        // proper spacing for the table
         if(($temp % 5) == 0){
             echo "</tr><tr>";
         } else echo "</td><td></td><td></td><td></td><td>

@@ -49,7 +49,7 @@
                 $testrow = mysqli_fetch_array($result);
 
                 // get the relevant parent id
-                $getPID = "SELECT parent_id FROM students WHERE student_id = {$targetID['id']}";
+                $getPID = "SELECT parent_id, grade FROM students WHERE student_id = {$targetID['id']}";
                 $pidRes = $mysqli->query($getPID);
                 $pidrow = mysqli_fetch_array($pidRes);
 
@@ -66,6 +66,8 @@
                     $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
                     echo "<table>"; // start a tag in the HTML
                     while($row = mysqli_fetch_array($result2)){ // loop through result
+
+                    
                     echo "  <tr>
                                 <td>ID:</td>
                                 <td>" . $row['id'] . "</td>
@@ -73,6 +75,10 @@
                             <tr>
                                 <td>Name:</td>
                                 <td>" . $row['name'] . "</td>
+                            </tr>
+                            <tr>
+                                <td>Grade:</td>
+                                <td>" . $pidrow['grade'] . "</td>
                             </tr>
                             <tr>
                                 <td>Parent Email:</td>

@@ -72,6 +72,7 @@
                     $bool = true;
                     echo "<table>"; // start a tag in the HTML
                     while($row = mysqli_fetch_array($result2)){   //Creates a loop to loop through results
+                    // get the grade for the student first
                     echo "  <tr>
                                 <td>ID:</td>
                                 <td>" . $row['id'] . "</td>
@@ -126,7 +127,11 @@
                                 $resQ = $mysqli->query($qstudInfo);
                                 echo "<table>";
                                 while($resQrow = mysqli_fetch_array($resQ)){ // loop through result
-                                echo "  <tr>
+                                    $getChildGrade = "SELECT grade FROM students WHERE student_id = {$resQrow['id']}";
+                                    $gradeResult = $mysqli->query($getChildGrade);
+                                    $gradeArr = mysqli_fetch_array($gradeResult);
+
+                                    echo "<tr>
                                             <td>ID:</td>
                                             <td>" . $resQrow['id'] . "</td>
                                         </tr>
@@ -135,8 +140,8 @@
                                             <td>" . $resQrow['name'] . "</td>
                                         </tr>
                                         <tr>
-                                            <td>Parent Email:</td>
-                                            <td>" . $email . "</td>
+                                            <td>Grade:</td>
+                                            <td>" . $gradeArr['grade'] . "</td>
                                         </tr>
                                         <tr>  
                                             <td>Email:</td>
