@@ -102,8 +102,8 @@
                 $temp+=1;
         if(($temp % 4) == 0){
             echo "</tr><tr>";
-        } else echo "   </td></td></td></td></td></td></td>
-                        <td><td><td><td><td><td><td>";
+        } else echo "</td><td></td><td></td><td></td><td>
+                    </td><td></td><td></td><td></td><td>";
         echo "</td><td>";
     }
     echo "</td</tr></table>"; ?>
