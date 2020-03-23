@@ -273,7 +273,7 @@ if (isset($_POST['JoinMeeting']))
                     $ismentorRes2 = $mysqli->query($ismentor2);
                     $noRows3 = mysqli_num_rows($ismentorRes2);
                     if($noRows3 == 0){
-                        $removementor = "DELETE FROM `mentors` WHERE mentor_id = $id ";
+                        $removementor = "DELETE FROM `mentors` WHERE mentor_id = $id";
                         $RemovementorRes = $mysqli->query($removementor);
                     }
                 }
@@ -286,7 +286,82 @@ if (isset($_POST['JoinMeeting']))
 // code for leaving a meeting
 if (isset($_POST['LeaveMeeting']))
 {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $user = $_POST['user'];
+    $id = $_POST['id'];
     $meet_id = $_POST['meet_id'];
+    $ment = $_POST['ment'];
+
+    // if youre trying to leave a mentee meeting
+    if($ment == "Mentee"){
+        // if the user is not a mentee, no need to continue
+        $isMentee = "SELECT * FROM enroll WHERE mentee_id = $id";
+        $isMenteeRes = $mysqli->query($isMentee);
+        $noRows = mysqli_num_rows($isMenteeRes);
+        if($noRows == 0){
+            echo "You are not a mentee for any meeting";
+        }
+        else{
+            // If they are not a mentee of the desired meeting, stop
+            $isInMeeting = "SELECT * FROM enroll WHERE mentee_id = $id AND meet_id = $meet_id";
+            $isInMeetingRes = $mysqli->query($isInMeeting);
+            $noRows2 = mysqli_num_rows($isInMeetingRes);
+            if($noRows2 == 0){
+                echo "You are not a mentee for this meeting";
+            }
+            else{
+                $removeFromMeeting = "DELETE FROM enroll WHERE mentee_id = $id AND meet_id = $meet_id";
+                $removeResult = $mysqli->query($removeFromMeeting);
+                if(mysqli_affected_rows($mysqli) == 1){
+                    echo "Successfully removed";
+                }
+                // if the user is not a mentee for any otherr meeting, remove them from mentee table
+                $isMentee2 = "SELECT * FROM enroll WHERE mentee_id = $id";
+                $isMenteeRes2 = $mysqli->query($isMentee2);
+                $noRows3 = mysqli_num_rows($isMenteeRes2);
+                if($noRows3 == 0){
+                    $removeMentee = "DELETE FROM `mentees` WHERE mentee_id = $id";
+                    $RemoveMenteeRes = $mysqli->query($removeMentee);
+                }
+            }
+        }
+    } else {
+        // if youre trying to leave a mentor meeting
+        // if the user is not a mentor, no need to continue
+        $ismentor = "SELECT * FROM enroll2 WHERE mentor_id = $id";
+        $ismentorRes = $mysqli->query($ismentor);
+        if($ismentorRes){
+            $noRows = mysqli_num_rows($ismentorRes);
+            if($noRows == 0){
+                echo "You are not a mentor for any meeting";
+            }
+            else{
+                // If they are not a mentor of the desired meeting, stop
+                $isInMeeting = "SELECT * FROM enroll2 WHERE mentor_id = $id AND meet_id = $meet_id";
+                $isInMeetingRes = $mysqli->query($isInMeeting);
+                $noRows2 = mysqli_num_rows($isInMeetingRes);
+                if($noRows2 == 0){
+                    echo "You are not a mentor for this meeting";
+                }
+                else{
+                    $removeFromMeeting = "DELETE FROM enroll2 WHERE mentor_id = $id AND meet_id = $meet_id";
+                    $removeResult = $mysqli->query($removeFromMeeting);
+                    if(mysqli_affected_rows($mysqli) == 1){
+                        echo "Successfully removed";
+                    }
+                    // if the user is not a mentor for any otherr meeting, remove them from mentor table
+                    $ismentor2 = "SELECT * FROM enroll2 WHERE mentor_id = $id";
+                    $ismentorRes2 = $mysqli->query($ismentor2);
+                    $noRows3 = mysqli_num_rows($ismentorRes2);
+                    if($noRows3 == 0){
+                        $removementor = "DELETE FROM `mentors` WHERE mentor_id = $id";
+                        $RemovementorRes = $mysqli->query($removementor);
+                    }
+                }
+            }
+        }
+    }
 }
 ?>
 </center>
