@@ -98,7 +98,7 @@
                     }
                     // dispaly the buttons for viewing and editing eetings
                     echo " <tr><td><br>Meetings:</td><td>"; ?><br>
-                    <form action="ViewMeeting.php" method="post">
+                    <form action="AdminViewMeeting.php" method="post">
                         <input type="hidden" name="email" value= <?php echo $email ?> >
                         <input type="hidden" name="password" value= <?php echo $password ?> >
                         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >

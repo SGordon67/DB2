@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1> <font face="Times New Roman" color="black" size="+10"><center>Student Info</center></font></h1>
     <center>
     <?php
         $user = "student";
@@ -62,20 +61,16 @@
                     $bool = false;
                     echo "Incorrect Password";
                 }else{
+                    ?><!-- Displaying the header with the users name -->
+                    <h1><font face="Times New Roman" color="black" size="+10"><center><?php echo $testrow['name']?>'s Info</center></font></h1>
+                    <?php
                     $bool = true;
                     $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
                     echo "<table>"; // start a tag in the HTML
-                    while($row = mysqli_fetch_array($result2)){ // loop through result
 
                     
-                    echo "  <tr>
-                                <td>ID:</td>
-                                <td>" . $row['id'] . "</td>
-                            </tr>
-                            <tr>
-                                <td>Name:</td>
-                                <td>" . $row['name'] . "</td>
-                            </tr>
+                    while($row = mysqli_fetch_array($result2)){ // loop through result
+                    echo "
                             <tr>
                                 <td>Grade:</td>
                                 <td>" . $pidrow['grade'] . "</td>
@@ -98,19 +93,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Password:</td>
-                                <td>" . $row['password'] . "</td>
-                                <td>";?>
-                                <form action="UserEditPassword.php" method="post">
-                                        <input type="hidden" name='email' value= <?php echo $email ?> >
-                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
-                                        <input type="hidden" name="password" value= <?php echo $password ?> >
-                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
-                                        <input type="submit" class="button" name="editPassword" value="Edit Password"/>
-                                </form><?php echo "
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>Phone:</td>
                                 <td>" . $row['phone'] . "</td>
                                 <td>";?>
@@ -122,10 +104,37 @@
                                         <input type="submit" class="button" name="editPhone" value="Edit Phone"/>
                                 </form><?php echo "
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>";/* . $row['password'] . */ echo "</td>
+                                <td>";?>
+                                <form action="UserEditPassword.php" method="post">
+                                        <input type="hidden" name='email' value= <?php echo $email ?> >
+                                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                        <input type="hidden" name="password" value= <?php echo $password ?> >
+                                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+                                        <input type="submit" class="button" name="editPassword" value="Edit Password"/>
+                                </form><?php echo "
+                                </td>
                             </tr>";
                     }
-                    echo "</table>";
+                   // echo "</table>";
                 }
+                // dispaly the buttons for viewing and editing eetings
+                echo " <tr><td><br>Meetings:</td><td>"; ?><br>
+                <form action="JoinLeaveMeeting.php" method="post">
+                    <input type="hidden" name="email" value= <?php echo $email ?> >
+                    <input type="hidden" name="password" value= <?php echo $password ?> >
+                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                    <input type="submit" class="button" name="meetingButton" value="Join/Leave Meeting"/>
+                </form><?php echo "</td><td>"; ?><br>
+                <form action="StudentViewMeetings.php" method="post">
+                    <input type="hidden" name='email' value= <?php echo $email ?> >
+                    <input type="hidden" name="password" value= <?php echo $password ?> >
+                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                    <input type="submit" class="button" name="meetingButton" value="View Meetings"/>
+                </form><?php echo "</td></tr></table>";
             }
         }
         $mysqli->close();
