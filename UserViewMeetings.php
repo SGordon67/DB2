@@ -73,7 +73,7 @@
                         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
                         <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
                         <input type="hidden" name='meet_id' value= <?php echo $row['meet_id'] ?> >
-                        <input type="hidden" name='ment' value='Mentor' >
+                        <input type="hidden" name='ment' value='Mentee' >
                         <input type="submit" class="button" name="LeaveMeeting" value="Leave"/>
                     </form><?php echo "
                     </td>
@@ -146,6 +146,15 @@
                         <input type="hidden" name='meet_id' value= <?php echo $row2['meet_id'] ?> >
                         <input type="hidden" name='ment' value='Mentor' >
                         <input type="submit" class="button" name="LeaveMeeting" value="Leave"/>
+                    </form><?php echo "
+                    </td>
+                    <td>"; ?>
+                    <form action="MeetingInfo.php" method="post">
+                        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+                        <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+                        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+                        <input type="hidden" name='meet_id' value= <?php echo $row2['meet_id'] ?> >
+                        <input type="submit" class="button" name="LeaveMeeting" value="Info"/>
                     </form><?php echo "
                     </td>
                 </tr>
