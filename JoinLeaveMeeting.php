@@ -13,10 +13,11 @@
         $user = $_POST['user'];
         $mysqli = new mysqli('localhost', 'root', '', 'db2project');
         $email = $_POST['email'];
+        $emailEDIT = $_POST['emailEDIT'];
         $password = $_POST['password'];
 
         // get the id of the user
-        $getuserid = "SELECT id FROM users WHERE email = '$email'";
+        $getuserid = "SELECT id FROM users WHERE email = '$emailEDIT'";
         $idResult = $mysqli->query($getuserid);
         $idArr = mysqli_fetch_array($idResult);
 
@@ -25,6 +26,7 @@
         $gradeResult = $mysqli->query($getGrade);
         $gradeArr = mysqli_fetch_array($gradeResult);
 
+        echo $gradeArr['grade'];
         //get the meetings that they should see
         $getMeetingInfo = "SELECT * FROM meetings WHERE group_id >= ({$gradeArr['grade']})";
         $result = $mysqli->query($getMeetingInfo);
@@ -66,7 +68,8 @@
                     <tr>
                         <td>"; ?>
                         <form action="" method="post">
-                            <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+                            <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+                            <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" > 
                             <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
                             <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
                             <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
@@ -77,7 +80,8 @@
                         </td>
                         <td>"; ?>
                         <form action="" method="post">
-                            <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+                            <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+                            <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
                             <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
                             <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
                             <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
@@ -140,7 +144,8 @@
                     <tr>
                         <td>"; ?>
                         <form action="" method="post">
-                        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+                        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+                        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
                             <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
                             <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
                             <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
@@ -152,6 +157,7 @@
                         <td>"; ?>
                         <form action="" method="post">
                             <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
+                            <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
                             <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
                             <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
                             <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
@@ -172,25 +178,12 @@
         }
         echo "</td</tr></table>";
         echo "</td></tr></table>";
-        ?>
-<!-- Return button -->
-<?php if($user == "student") : ?>
-    <form action="StudentPage.php" method="post"><br>
-    <?php elseif($user == "parent") : ?>
-    <form action="ParentPage.php" method="post"><br>
-    <?php else : ?>
-    <form action="AdminPage.php" method="post"><br>
-    <?php endif; ?>
-        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" > 
-        <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
-        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
-        <input type="submit" class="button" name="returnButton" value="Return"/>
-    </form>
-<?php
+
 //code for Joining the meeting 
 if (isset($_POST['JoinMeeting']))
 {
     $email = $_POST['email'];
+    $emailEDIT = $_POST['emailEDIT'];
     $password = $_POST['password'];
     $user = $_POST['user'];
     $id = $_POST['id'];
@@ -287,6 +280,7 @@ if (isset($_POST['JoinMeeting']))
 if (isset($_POST['LeaveMeeting']))
 {
     $email = $_POST['email'];
+    $emailEDIT = $_POST['emailEDIT'];
     $password = $_POST['password'];
     $user = $_POST['user'];
     $id = $_POST['id'];
@@ -364,6 +358,20 @@ if (isset($_POST['LeaveMeeting']))
     }
 }
 ?>
+<!-- Return button -->
+<?php if($user == "student") : ?>
+    <form action="StudentPage.php" method="post"><br>
+    <?php elseif($user == "parent") : ?>
+    <form action="ParentPage.php" method="post"><br>
+    <?php else : ?>
+    <form action="AdminPage.php" method="post"><br>
+    <?php endif; ?>
+        <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+        <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
+        <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+        <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+        <input type="submit" class="button" name="returnButton" value="Return"/>
+    </form>
 </center>
 </body>
 </html>

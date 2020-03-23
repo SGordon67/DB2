@@ -23,7 +23,8 @@
             <option value="Math">Math</option>
             <option value="English">English</option>
         </select>
-        <?php echo "</td></tr><tr><td>Date:</t><td>"; ?>
+        <?php echo "</td></tr><tr><td>Date: 
+        <td>YYYY-MM-DD</td><tr><td></t><td>"; ?>
         <input type="text" id="date" name="date">
         <?php echo "</td></tr><tr><td>Announcement:</td><td>"; ?>
         <input type="text" id="announce" name="announce">

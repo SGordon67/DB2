@@ -125,12 +125,14 @@
                 echo " <tr><td><br>Meetings:</td><td>"; ?><br>
                 <form action="JoinLeaveMeeting.php" method="post">
                     <input type="hidden" name="email" value= <?php echo $email ?> >
+                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" > 
                     <input type="hidden" name="password" value= <?php echo $password ?> >
                     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                     <input type="submit" class="button" name="meetingButton" value="Join/Leave Meeting"/>
                 </form><?php echo "</td><td>"; ?><br>
                 <form action="StudentViewMeetings.php" method="post">
                     <input type="hidden" name='email' value= <?php echo $email ?> >
+                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" > 
                     <input type="hidden" name="password" value= <?php echo $password ?> >
                     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                     <input type="submit" class="button" name="meetingButton" value="View Meetings"/>
