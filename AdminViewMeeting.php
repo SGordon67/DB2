@@ -27,7 +27,7 @@
             $timeArr = mysqli_fetch_array($timeResult);
             // Display the table
             echo "  <table><tr>
-                        <td>ID:</td>
+                        <td>Meeting ID:</td>
                         <td>" . $row['meet_id'] . "</td>
                     </tr>
                     <tr>

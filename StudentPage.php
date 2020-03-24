@@ -33,7 +33,7 @@
         if(empty($targetID)){
             echo 'Invalid Student Email';
         } else{
-            if (!in_array($targetID[0], $sids)){
+            if (!in_array($targetID['id'], $sids)){
                 $bool = false;
                 echo 'Invalid Student Email';
             }
@@ -120,22 +120,39 @@
                             </tr>";
                     }
                    // echo "</table>";
-                   // dispaly the buttons for viewing and editing eetings
-                echo " <tr><td><br>Meetings:</td><td>"; ?><br>
+                   // dispaly the buttons for viewing and editing meetings
+                echo "
+                    <tr></tr><tr></tr><tr></tr><tr>
+                    </tr><tr></tr><tr></tr><tr></tr>
+                    <tr><td>Meetings:</td><td>"; ?>
                 <form action="JoinLeaveMeeting.php" method="post">
                     <input type="hidden" name="email" value= <?php echo $email ?> >
                     <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" > 
                     <input type="hidden" name="password" value= <?php echo $password ?> >
                     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                     <input type="submit" class="button" name="meetingButton" value="Join/Leave Meetings"/>
-                </form><?php echo "</td><td>"; ?><br>
+                </form><?php echo "</td><td>"; ?>
                 <form action="UserViewMeetings.php" method="post">
                     <input type="hidden" name='email' value= <?php echo $email ?> >
                     <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" > 
                     <input type="hidden" name="password" value= <?php echo $password ?> >
                     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                     <input type="submit" class="button" name="meetingButton" value="View My Meetings"/>
-                </form><?php echo "</td></tr></table>";
+                </form><?php echo "</td></tr>
+                <tr>
+                    <td></td>
+                    <td>";?>
+                        <form action="UserStudyMaterials.php" method="post">
+                            <input type="hidden" name='email' value= <?php echo $email ?> >
+                            <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" > 
+                            <input type="hidden" name="password" value= <?php echo $password ?> >
+                            <input type="hidden" name='id' value= <?php echo $targetID['id'] ?> >
+                            <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                            <input type="submit" class="button" name="meetingButton" value="View Study Materials"/>
+                        </form><?php echo "</td></tr>
+                    </td>
+                </tr>
+                </table>";
                 }
             }
         }

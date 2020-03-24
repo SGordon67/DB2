@@ -45,6 +45,10 @@
             echo "  
                 <table>
                 <tr>
+                    <td>Meeting ID:</td>
+                    <td>" . $row['meet_id'] . "</td>
+                </tr>
+                <tr>
                     <td>Subject:</td>
                     <td>" . $row['meet_name'] . "</td>
                 </tr>
@@ -115,6 +119,10 @@
             $timeArr2 = mysqli_fetch_array($timeResult2);
             echo "  
                 <table>
+                <tr>
+                    <td>Meeting ID:</td>
+                    <td>" . $row2['meet_id'] . "</td>
+                </tr>
                 <tr>
                     <td>Subject:</td>
                     <td>" . $row2['meet_name'] . "</td>

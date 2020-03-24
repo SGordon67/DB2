@@ -179,7 +179,7 @@
                                     </td>
                                 </tr>";
                         }
-                        // dispaly the buttons for viewing and editing eetings
+                        // dispaly the buttons for viewing and editing meetings
                         echo " <tr><td><br>Meetings:</td><td>"; ?><br>
                         <form action="JoinLeaveMeeting.php" method="post">
                             <input type="hidden" name="email" value= <?php echo $email ?> >
@@ -194,7 +194,20 @@
                             <input type="hidden" name="password" value= <?php echo $password ?> >
                             <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                             <input type="submit" class="button" name="meetingButton" value="View Meetings"/>
-                        </form><?php echo "</td></tr>";
+                        </form><?php echo "</td></tr>
+                        <tr>
+                            <td></td>
+                            <td>";?>
+                                <form action="UserStudyMaterials.php" method="post">
+                                    <input type="hidden" name='email' value= <?php echo $email ?> >
+                                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $value;?>" > 
+                                    <input type="hidden" name="password" value= <?php echo $password ?> >
+                                    <input type="hidden" name='id' value= <?php echo $targetID['id'] ?> >
+                                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
+                                    <input type="submit" class="button" name="meetingButton" value="View Study Materials"/>
+                                </form><?php echo "</td></tr>
+                            </td>
+                        </tr>";
                         echo "</table></td><td></td><td></td><td>
                         </td><td></td><td></td><td></td><td>";
                     }

@@ -183,7 +183,6 @@
     }
 
 ?>
-
 <!-- Return button -->
 <form action="AdminViewMeeting.php" method="post"><br>
     <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
