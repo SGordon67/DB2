@@ -41,7 +41,7 @@ INSERT INTO users (id, email, password, name, phone) VALUES (26, 'student91@gmai
 
 INSERT INTO students (student_id, grade, parent_id) VALUES (12, 6, 2);
 INSERT INTO students (student_id, grade, parent_id) VALUES (13, 12, 2);
-INSERT INTO students (student_id, grade, parent_id) VALUES (14, 7, 2);
+INSERT INTO students (student_id, grade, parent_id) VALUES (14, 9, 2);
 INSERT INTO students (student_id, grade, parent_id) VALUES (15, 8, 3);
 INSERT INTO students (student_id, grade, parent_id) VALUES (16, 9, 3);
 INSERT INTO students (student_id, grade, parent_id) VALUES (17, 6, 4);

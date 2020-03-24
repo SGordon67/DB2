@@ -357,7 +357,40 @@ if (isset($_POST['LeaveMeeting']))
         }
     }
 }
+// code for joining all the available meetings
+// code for leaving a meeting
+if (isset($_POST['JoinAllMeeting']))
+{
+    $email = $_POST['email'];
+    $emailEDIT = $_POST['emailEDIT'];
+    $password = $_POST['password'];
+    $user = $_POST['user'];
+    $id = $_POST['id'];
+    $meet_id = $_POST['meet_id'];
+    $ment = $_POST['ment'];
+
+    echo "Hello World";
+}
+
 ?>
+<!-- Join All button -->
+<form action="" method="post"><br>
+    <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
+    <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+    <input type="submit" class="button" name="JoinAllButton" value="Join All Meetings"/>
+</form>
+
+<!-- Leave All button -->
+<form action="" method="post"><br>
+    <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
+    <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+    <input type="submit" class="button" name="LeaveAllButton" value="Leave All Meetings"/>
+</form>
+
 <!-- Return button -->
 <?php if($user == "student") : ?>
     <form action="StudentPage.php" method="post"><br>
@@ -372,6 +405,7 @@ if (isset($_POST['LeaveMeeting']))
         <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
         <input type="submit" class="button" name="returnButton" value="Return"/>
     </form>
+
 </center>
 </body>
 </html>
