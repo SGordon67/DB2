@@ -48,7 +48,7 @@
                 <td>Group:</td>
                 <td>" . $meetingInfoRow['group_id'] . "</td>
             </tr>
-        </table>";
+        </table><br>";
 
     $numRows2 = 0;
     $getThisMaterialID = "SELECT * FROM assign WHERE meet_id = {$meetingInfoRow['meet_id']}";
@@ -58,42 +58,132 @@
     if($numRows > 0){
         $getThisMaterial = "SELECT * FROM material WHERE material_id = {$materialArr['material_id']}";
         $thisMaterialRes = $mysqli->query($getThisMaterial);
+        $materialArr2 = mysqli_fetch_array($thisMaterialRes);
         $numRows2=mysqli_num_rows($thisMaterialRes); 
     }
 
     if($numRows2 > 0){
         echo "Material assigned this meeting:";
-
-        echo "  
+        echo "<br><br>";
+        echo "
             <table>
                 <tr>
-                    <td>Subject:</td>
-                    <td>" . $thisMaterialRes['meet_name'] . "</td>
+                    <td>Material Subject:</td>
+                    <td>" . $materialArr2['type'] . "</td>
                 </tr>
                 <tr>
-                    <td>Date:</td>
-                    <td>" . $thisMaterialRes['date'] . "</td>
+                    <td>Material Title:</td>
+                    <td>" . $materialArr2['title'] . "</td>
                 </tr>
                 <tr>
-                    <td>Start Time:</td>
-                    <td>" . $thisMaterialRes['start_time'] . "</td>
+                    <td>Material URL:</td>
+                    <td>" . $materialArr2['url'] . "</td>
                 </tr>
                 <tr>
-                    <td>End Time:</td>
-                    <td>" . $thisMaterialRes['end_time'] . "</td>
+                    <td>Material Assigned:</td>
+                    <td>" . $materialArr2['assigned_date'] . "</td>
                 </tr>
                 <tr>
-                    <td>Group:</td>
-                    <td>" . $thisMaterialRes['group_id'] . "</td>
+                    <td>Material Notes:</td>
+                    <td>" . $materialArr2['notes'] . "</td>
+                </tr>
+                <tr>
+                    <td>Edit:</td>
+                    <td>"; ?>
+                        <form action="" method="post">
+                            <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+                            <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+                            <input type="hidden" id="meet_id" name="meet_id" value="<?php echo $meet_id;?>" >
+                            <input type="hidden" id="material_id" name="material_id" value="<?php echo $materialArr2['material_id'];?>" >
+                            <input type="submit" class="button" name="unassignButton" value="Unassign"/>
+                        </form><?php echo "
+                    </td>
                 </tr>
             </table>";
 
     } else echo "No material asigned to this meeting";
     
-    echo "<br>";
+    echo "<br><br>";
 
-    echo "Material Options";
+    echo "Material Options:";
+    echo "<br><br>";
+    $getMaterials = "SELECT * FROM material";
+    $materialRes2 = $mysqli->query($getMaterials);
+    while($materialArr2 = mysqli_fetch_array($materialRes2)){
+        echo "
+            <table>
+                <tr>
+                    <td>Material Subject:</td>
+                    <td>" . $materialArr2['type'] . "</td>
+                </tr>
+                <tr>
+                    <td>Material Title:</td>
+                    <td>" . $materialArr2['title'] . "</td>
+                </tr>
+                <tr>
+                    <td>Material URL:</td>
+                    <td>" . $materialArr2['url'] . "</td>
+                </tr>
+                <tr>
+                    <td>Material Assigned:</td>
+                    <td>" . $materialArr2['assigned_date'] . "</td>
+                </tr>
+                <tr>
+                    <td>Material Notes:</td>
+                    <td>" . $materialArr2['notes'] . "</td>
+                </tr>
+                <tr>
+                    <td>Edit:</td>
+                    <td>"; ?>
+                        <form action="" method="post">
+                            <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
+                            <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+                            <input type="hidden" id="meet_id" name="meet_id" value="<?php echo $meet_id;?>" >
+                            <input type="hidden" id="material_id" name="material_id" value="<?php echo $materialArr2['material_id'];?>" >
+                            <input type="submit" class="button" name="assignButton" value="Assign"/>
+                        </form><?php echo "
+                    </td>
+                </tr>
+            </table>";
+
+    }
+
+    if (isset($_POST['unassignButton']))
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $meet_id = $_POST['meet_id'];
+        $material_id = $_POST['material_id'];
+
+        $unassign = "DELETE FROM `assign` WHERE meet_id = '$meet_id' AND material_id = '$material_id'";
+        $unRes = $mysqli->query($unassign);
+        echo "Material has been unassigned to from this meeting";
+    }
+
+    if (isset($_POST['assignButton']))
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $meet_id = $_POST['meet_id'];
+        $material_id = $_POST['material_id'];
+
+        // see if there is already a material assigned
+        $matAssigned = "SELECT * FROM assign WHERE meet_id = '$meet_id'";
+        $assignedRes = $mysqli->query($matAssigned);
+        $assignedArr = mysqli_fetch_array($assignedRes);
+        $numAssignedRows=mysqli_num_rows($assignedRes); 
+        if($numAssignedRows > 0){
+            echo "Meeting already has an asssigned material";
+        } else{
+            //assign the material to the meeting
+            $assignMaterial = "INSERT INTO `assign`(`meet_id`, `material_id`) VALUES ('$meet_id','$material_id')";
+            $assignRes = $mysqli->query($assignMaterial);
+
+        }
+    }
+
 ?>
+
 <!-- Return button -->
 <form action="AdminViewMeeting.php" method="post"><br>
     <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
