@@ -108,7 +108,16 @@
                     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                     <input type="submit" class="button" name="meetingButton" value="Create Meeting"/>
                 </form><?php
-                echo "</td></tr></table>";
+                echo "</td></tr>
+                    <tr>
+                        <td><td>"; ?>
+                            <form action="AdminCreateMaterial.php" method="post">
+                            <input type="hidden" name='email' value= <?php echo $email ?> >
+                            <input type="hidden" name="password" value= <?php echo $password ?> >
+                            <input type="submit" class="button" name="materialButton" value="Create Study Material"/>
+                            </form> <?php echo "
+                        </td></td>
+                    </tr></table>";
             }
         }
     }
