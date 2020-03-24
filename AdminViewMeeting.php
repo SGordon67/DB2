@@ -51,13 +51,19 @@
                         <td>" . $row['group_id'] . "</td>
                     </tr>
                     <tr>
-                        <td>Delete Meeting:</td>
                         <td>";?>
                         <form action="" method="post">
                             <input type="hidden" name='email' value= <?php echo $email ?> >
                             <input type="hidden" name="password" value= <?php echo $password ?> >
                             <input type="hidden" name="meet_id" value= <?php echo $row['meet_id'] ?> >
-                            <input type="submit" class="button" name="deleteButton" value="Delete"/>
+                            <input type="submit" class="button" name="deleteButton" value="Delete Meeting"/>
+                        </form><?php echo "</td>
+                        <td>";?>
+                        <form action="AddMaterial.php" method="post">
+                            <input type="hidden" name='email' value= <?php echo $email ?> >
+                            <input type="hidden" name="password" value= <?php echo $password ?> >
+                            <input type="hidden" name="meet_id" value= <?php echo $row['meet_id'] ?> >
+                            <input type="submit" class="button" name="deleteButton" value="Material"/>
                         </form><?php echo "
                         </td>
                     </tr></table>";
