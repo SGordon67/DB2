@@ -49,10 +49,7 @@
                 $result2 = $mysqli->query($qGetInfo); // need second instance of variable to work with
                 echo "<table>"; // table for showing the admin information
                 while($row = mysqli_fetch_array($result2)){ // loop through result
-                echo "  <tr>
-                            <td>ID:</td>
-                            <td>" . $row['id'] . "</td>
-                        </tr>
+                echo "  
                         <tr>
                             <td>Name:</td>
                             <td>" . $row['name'] . "</td>
