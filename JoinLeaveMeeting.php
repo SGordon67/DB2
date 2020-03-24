@@ -363,6 +363,7 @@ if (isset($_POST['LeaveMeeting']))
     <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
     <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
     <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+    <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
     <input type="submit" class="button" name="JoinAllButton" value="Join All Meetings"/>
 </form>
@@ -372,6 +373,7 @@ if (isset($_POST['LeaveMeeting']))
     <input type="hidden" id="email" name="email" value="<?php echo $email;?>" >
     <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $emailEDIT;?>" >
     <input type="hidden" id="password" name="password" value="<?php echo $password;?>" >
+    <input type="hidden" name='id' value= <?php echo $idArr['id'] ?> >
     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
     <input type="submit" class="button" name="LeaveAllButton" value="Leave All Meetings"/>
 </form>
@@ -384,8 +386,10 @@ if (isset($_POST['JoinAllButton']))
     $emailEDIT = $_POST['emailEDIT'];
     $password = $_POST['password'];
     $user = $_POST['user'];
+    $id - $_POST['id'];
 
-    echo "Hello World";
+    
+    echo "Hello World2";
 }
 // code for leaving all the available meetings
 if (isset($_POST['LeaveAllButton']))
@@ -394,8 +398,25 @@ if (isset($_POST['LeaveAllButton']))
     $emailEDIT = $_POST['emailEDIT'];
     $password = $_POST['password'];
     $user = $_POST['user'];
+    $id = $_POST['id'];
 
-    echo "Hello World";
+    // remove from all mentee meetings
+    $leaveMenteeMeeting = "DELETE FROM enroll WHERE mentee_id = '$id'";
+    $leaveRes = $mysqli->query($leaveMenteeMeeting);
+
+    // remove from mentee table
+    $leaveMentee = "DELETE FROM mentees WHERE mentee_id = '$id'";
+    $leaveRes2 = $mysqli->query($leaveMentee);
+
+    // remove from all mentor meetings
+    $leaveMentorMeeting = "DELETE FROM enroll2 WHERE mentee_id = '$id'";
+    $leaveRes3 = $mysqli->query($leaveMentorMeeting);
+
+    // remove from mentor table
+    $leaveMentor = "DELETE FROM mentors WHERE mentor_id = '$id'";
+    $leaveRes4 = $mysqli->query($leaveMentor);
+
+    echo "Left all meetings.";
 }
 ?>
 
