@@ -18,7 +18,6 @@
         <button type="SignUpStudent" formaction="http://localhost/dashboard/DB2/SignUpStudent.php">Student</button>
     </form>
     <?php
-    echo "hi Scott :)";
     ?>
     </center>
 </body>

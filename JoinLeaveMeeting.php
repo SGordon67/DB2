@@ -26,7 +26,6 @@
         $gradeResult = $mysqli->query($getGrade);
         $gradeArr = mysqli_fetch_array($gradeResult);
 
-        echo $gradeArr['grade'];
         //get the meetings that they should see
         $getMeetingInfo = "SELECT * FROM meetings WHERE group_id >= ({$gradeArr['grade']})";
         $result = $mysqli->query($getMeetingInfo);
@@ -357,20 +356,6 @@ if (isset($_POST['LeaveMeeting']))
         }
     }
 }
-// code for joining all the available meetings
-// code for leaving a meeting
-if (isset($_POST['JoinAllMeeting']))
-{
-    $email = $_POST['email'];
-    $emailEDIT = $_POST['emailEDIT'];
-    $password = $_POST['password'];
-    $user = $_POST['user'];
-    $id = $_POST['id'];
-    $meet_id = $_POST['meet_id'];
-    $ment = $_POST['ment'];
-
-    echo "Hello World";
-}
 
 ?>
 <!-- Join All button -->
@@ -390,6 +375,29 @@ if (isset($_POST['JoinAllMeeting']))
     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
     <input type="submit" class="button" name="LeaveAllButton" value="Leave All Meetings"/>
 </form>
+
+<?php
+// code for joining all the available meetings
+if (isset($_POST['JoinAllButton']))
+{
+    $email = $_POST['email'];
+    $emailEDIT = $_POST['emailEDIT'];
+    $password = $_POST['password'];
+    $user = $_POST['user'];
+
+    echo "Hello World";
+}
+// code for leaving all the available meetings
+if (isset($_POST['LeaveAllButton']))
+{
+    $email = $_POST['email'];
+    $emailEDIT = $_POST['emailEDIT'];
+    $password = $_POST['password'];
+    $user = $_POST['user'];
+
+    echo "Hello World";
+}
+?>
 
 <!-- Return button -->
 <?php if($user == "student") : ?>
