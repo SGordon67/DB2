@@ -102,19 +102,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Password:</td>
-                            <td>" . $row['password'] . "</td>
-                            <td>";?>
-                            <form action="UserEditPassword.php" method="post">
-                                    <input type="hidden" name='email' value= <?php echo $email ?> >
-                                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
-                                    <input type="hidden" name="password" value= <?php echo $password ?> >
-                                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
-                                    <input type="submit" class="button" name="editPassword" value="Edit Password"/>
-                            </form><?php echo "
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Phone:</td>
                             <td>" . $row['phone'] . "</td>
                             <td>";?>
@@ -124,6 +111,19 @@
                                     <input type="hidden" name="password" value= <?php echo $password ?> >
                                     <input type="hidden" id="user" name="user" value="<?php echo $user;?>" >
                                     <input type="submit" class="button" name="editPhone" value="Edit Phone"/>
+                            </form><?php echo "
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td>";/* . $row['password'] . */ echo "</td>
+                            <td>";?>
+                            <form action="UserEditPassword.php" method="post">
+                                    <input type="hidden" name='email' value= <?php echo $email ?> >
+                                    <input type="hidden" id="emailEDIT" name="emailEDIT" value="<?php echo $email;?>" >
+                                    <input type="hidden" name="password" value= <?php echo $password ?> >
+                                    <input type="hidden" id="user" name="user" value="<?php echo $user;?>" > 
+                                    <input type="submit" class="button" name="editPassword" value="Edit Password"/>
                             </form><?php echo "
                             </td>
                         </tr>";

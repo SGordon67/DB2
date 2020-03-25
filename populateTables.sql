@@ -1,4 +1,4 @@
-INSERT INTO users (id, email, password, name, phone) VALUES (1, 'admin@gmail.com', 'password', 'admin', '9999999999');
+INSERT INTO users (id, email, password, name, phone) VALUES (1, 'admin@gmail.com', 'password', 'admin', '0123456789');
 INSERT INTO admins (admin_id) VALUES (1);
 
 INSERT INTO users (id, email, password, name, phone) VALUES (2, 'parent0@gmail.com', 'password', 'parent0', '0000000000');
