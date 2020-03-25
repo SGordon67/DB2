@@ -26,6 +26,7 @@
 ?> 
 <h1> <font face="Times New Roman" color="black" size="+10"><center><?php echo $idArr['name']."'s Study Materials"; ?></center></font></h1>
 <?php
+    // get all study materials for meetings (mentee or mentor)
     // get all the meeting ID's from enroll table and enroll2 table
     $getMeetings = "SELECT meet_id FROM enroll WHERE mentee_id = '$id' UNION SELECT meet_id FROM enroll2 WHERE mentor_id = '$id'";
     $meetingsRes = $mysqli->query($getMeetings);
