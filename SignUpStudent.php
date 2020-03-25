@@ -61,7 +61,7 @@
             $grade = $_POST['grade'];
 
             // insert into users table
-            $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+            $mysqli = new mysqli('localhost', 'root', '', 'DB2');
             $query = "INSERT INTO users(email, password, name, phone) VALUES ('$email','$password','$name','$phone')";
             $mysqli->query($query);
             

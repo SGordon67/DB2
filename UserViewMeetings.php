@@ -10,7 +10,7 @@
 <?php
     // get posted variables
     $user = $_POST['user'];
-    $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+    $mysqli = new mysqli('localhost', 'root', '', 'DB2');
     $email = $_POST['email'];
     $emailEDIT = $_POST['emailEDIT'];
     $password = $_POST['password'];

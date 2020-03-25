@@ -10,7 +10,7 @@
 <h1> <font face="Times New Roman" color="black" size="+10"><center>Meeting Information:</center></font></h1>
 <?php
     // get posted variables
-    $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+    $mysqli = new mysqli('localhost', 'root', '', 'DB2');
     $email = $_POST['email'];
     $password = $_POST['password'];
     $user = $_POST['user'];

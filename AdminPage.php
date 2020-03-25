@@ -9,7 +9,7 @@
 <center>
 <?php
     $user = "admin";
-    $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+    $mysqli = new mysqli('localhost', 'root', '', 'DB2');
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -18,7 +18,7 @@
     $todayDate = date('Y-m-d');
     $testDate = date('Y-m-d', strtotime($todayDate. ' + 3 days'));
     if($dayOfWeek == 'Friday'){
-        $getMeetings = "SELECT * FROM meetings where date < '$testDate'";
+        $getMeetings = "SELECT * FROM meetings where date < '$testDate' AND date > '$todayDate'";
         $meetRes = $mysqli->query($getMeetings);
         while($meetRow = mysqli_fetch_assoc($meetRes)){
             $getMeetingMentees = "SELECT * FROM enroll WHERE meet_id = {$meetRow['meet_id']}";

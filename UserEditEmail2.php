@@ -10,7 +10,7 @@
     <?php
         // setup the database for query, grab variables from post
         $head = "Error";
-        $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+        $mysqli = new mysqli('localhost', 'root', '', 'DB2');
         $email = $_POST['email'];
         $emailEDIT = $_POST['emailEDIT'];
         $password = $_POST['password'];

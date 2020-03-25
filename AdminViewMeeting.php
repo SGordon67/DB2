@@ -10,7 +10,7 @@
     <center>
     <?php
         $user = "admin";
-        $mysqli = new mysqli('localhost', 'root', '', 'db2project');
+        $mysqli = new mysqli('localhost', 'root', '', 'DB2');
         $email = $_POST['email'];
         $password = $_POST['password'];
 
