@@ -8,13 +8,45 @@
 <body>
 <center>
 <?php
-    // on login check if its friday/if a meeting must be cancelled
-    
     $user = "admin";
     $mysqli = new mysqli('localhost', 'root', '', 'db2project');
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
+
+    // on login check if its friday/if a meeting must be cancelled
+    $dayOfWeek = date('l');
+    $todayDate = date('Y-m-d');
+    $testDate = date('Y-m-d', strtotime($todayDate. ' + 3 days'));
+    if($dayOfWeek == 'Friday'){
+        $getMeetings = "SELECT * FROM meetings where date < '$testDate'";
+        $meetRes = $mysqli->query($getMeetings);
+        while($meetRow = mysqli_fetch_assoc($meetRes)){
+            $getMeetingMentees = "SELECT * FROM enroll WHERE meet_id = {$meetRow['meet_id']}";
+            $menteesRes = $mysqli->query($getMeetingMentees);
+            $numRows = mysqli_num_rows($menteesRes);
+            if($numRows < 3){
+                $deleteEnroll = "DELETE FROM enroll WHERE meet_id = {$meetRow['meet_id']}";
+                $deleteEnrollRes = $mysqli->query($deleteEnroll);
+                $deleteEnroll2 = "DELETE FROM enroll2 WHERE meet_id = {$meetRow['meet_id']}";
+                $deleteEnroll2Res = $mysqli->query($deleteEnroll2);
+                $deleteMeeting = "DELETE FROM enroll WHERE meet_id = {$meetRow['meet_id']}";
+                $deleteMeetingRes = $mysqli->query($deleteMeeting);
+            }
+
+            $getMeetingMentors = "SELECT * FROM enroll2 WHERE meet_id = {$meetRow['meet_id']}";
+            $mentorsRes = $mysqli->query($getMeetingMentors);
+            $numRows2 = mysqli_num_rows($mentorsRes);
+            if($numRows2 < 2){
+                $deleteMentorsEnroll = "DELETE FROM enroll WHERE meet_id = {$meetRow['meet_id']}";
+                $deleteMentorsEnrollRes = $mysqli->query($deleteMentorsEnroll);
+                $deleteMentorsEnroll2 = "DELETE FROM enroll2 WHERE meet_id = {$meetRow['meet_id']}";
+                $deleteMentorsEnroll2Res = $mysqli->query($deleteMentorsEnroll2);
+                $deleteMentorsMeeting = "DELETE FROM enroll WHERE meet_id = {$meetRow['meet_id']}";
+                $deleteMentorsMeetingRes = $mysqli->query($deleteMentorsMeeting);
+            }
+        }
+    }
+
     // get the target ID entered
     $qGetId = "SELECT id FROM users WHERE email = '$email'";
     $id = $mysqli->query($qGetId);
