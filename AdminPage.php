@@ -8,6 +8,8 @@
 <body>
 <center>
 <?php
+    // on login check if its friday/if a meeting must be cancelled
+    
     $user = "admin";
     $mysqli = new mysqli('localhost', 'root', '', 'db2project');
     $email = $_POST['email'];
