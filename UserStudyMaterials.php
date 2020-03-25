@@ -26,8 +26,10 @@
 ?> 
 <h1> <font face="Times New Roman" color="black" size="+10"><center><?php echo $idArr['name']."'s Study Materials"; ?></center></font></h1>
 <?php
+    // get all the meeting ID's from enroll table and enroll2 table
     $getMeetings = "SELECT meet_id FROM enroll WHERE mentee_id = '$id' UNION SELECT meet_id FROM enroll2 WHERE mentor_id = '$id'";
     $meetingsRes = $mysqli->query($getMeetings);
+    echo "<table>";
     while($meetingArr = mysqli_fetch_array($meetingsRes)){
         $getMaterialID = "SELECT * FROM assign WHERE meet_id = {$meetingArr['meet_id']}";
         $materialRes = $mysqli->query($getMaterialID);
@@ -35,21 +37,24 @@
             $getMaterialInfo = "SELECT * FROM material WHERE material_id = {$materialIDArr['material_id']}";
             $materialRes2 = $mysqli->query($getMaterialInfo);
             while($materialInfoArr = mysqli_fetch_array($materialRes2)){
-                echo "  
-                    <table>
+                echo "
                     <tr>
                         <td>Meeting ID:</td>
-                        <td>" . $meetingArr['meet_id'] . "</td>
+                        <td>".$meetingArr['meet_id']."</td>
                     </tr>
                     <tr>
                         <td>URL:</td>
-                        <td>" . $materialInfoArr['url'] . "</td>
+                        <td>".$materialInfoArr['url']."</td>
                     </tr>
-                    </table>";
+                    <tr></tr><tr></tr><tr></tr>
+                    <tr></tr><tr></tr><tr></tr>
+                    <tr></tr><tr></tr><tr></tr>
+                    <tr></tr><tr></tr><tr></tr>";
+                    // spacing between rows of the table
             }
-            echo "<br><br>";
         }
     }
+    echo "</table>";
 
 
 
